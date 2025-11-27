@@ -1,0 +1,168 @@
+Program 8 
+Develop a basic student attendance mobile app using 
+Flutter 
+Steps:  
+1. Open cmd and enter "git --version" 
+If you have a version displayed then it is downloaded 
+If " 'git' is not recognized as an internal or external command, 
+operable program or batch file."  this is the output then you need to download git.  
+2.  
+Go to Extensions in VS code and search for Flutter by Dart Code and install it. 
+3. Go to View > Command Palette or press Control + Shift + P. 
+4.  
+5.  
+6.  
+7.  
+8.  
+9.  
+In the command palette, type flutter. 
+Select Flutter: New Project. 
+VS Code prompts you to locate the Flutter SDK on your computer. Select Download SDK. 
+When the Select Folder for Flutter SDK dialog displays, choose where you want to install 
+Flutter. 
+Click Clone Flutter. 
+While downloading Flutter, VS Code displays this pop-up notification: 
+Downloading the Flutter SDK. This may take a few minutes. 
+This download takes a few minutes. If you suspect that the download has hung, click Cancel 
+then start the installation again. 
+10.  Click Add SDK to PATH. 
+When successful, a notification displays: 
+The Flutter SDK was added to your PATH 
+VS Code might display a Google Analytics notice. 
+If you agree, click OK. 
+11.  Close, then reopen all terminal windows. 
+12. Restart VS Code. 
+13. Open the folder which you have selected in step 7. 
+14. Open new terminal, and enter "flutter create attendance_app" 
+15. You can see the attedance_app folder on the left side, open that 
+16. Go to lib\main.dart and replace the code with this and save it. 
+import 'package:flutter/material.dart'; 
+void main() { 
+runApp(AttendanceApp()); 
+} 
+class AttendanceApp extends StatefulWidget { 
+@override 
+_AttendanceAppState createState() => _AttendanceAppState(); 
+} 
+class _AttendanceAppState extends State<AttendanceApp> { 
+List<String> students = [ 
+"Aarav", 
+"Sita", 
+"Rohan", 
+"Pranavi", 
+"Zara", 
+"Kabir", 
+]; 
+Map<String, bool> attendance = {}; 
+ 
+  @override 
+  void initState() { 
+    super.initState(); 
+    for (var name in students) { 
+      attendance[name] = false; 
+    } 
+  } 
+ 
+  @override 
+  Widget build(BuildContext context) { 
+    int presentCount = 
+        attendance.values.where((value) => value == true).length; 
+ 
+    return MaterialApp( 
+      home: Scaffold( 
+        appBar: AppBar( 
+          title: Text("Student Attendance"), 
+          backgroundColor: Colors.blueAccent, 
+        ), 
+ 
+        body: Column( 
+          children: [ 
+            SizedBox(height: 10), 
+ 
+            // Summary Text 
+            Text( 
+              "Present: $presentCount / ${students.length}", 
+              style: TextStyle( 
+                fontSize: 20, 
+                fontWeight: FontWeight.bold, 
+              ), 
+            ), 
+ 
+            SizedBox(height: 10), 
+ 
+            // Buttons 
+            Row( 
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly, 
+              children: [ 
+                ElevatedButton( 
+                  onPressed: () { 
+                    setState(() { 
+                      for (var s in students) { 
+                        attendance[s] = true; 
+                      } 
+                    }); 
+                  }, 
+                  child: Text("Mark All Present"), 
+                ), 
+                ElevatedButton( 
+                  onPressed: () { 
+                    setState(() { 
+                      for (var s in students) { 
+                        attendance[s] = false; 
+                      } 
+                    }); 
+                  }, 
+                  child: Text("Reset"), 
+                ), 
+              ], 
+            ), 
+ 
+            SizedBox(height: 15), 
+ 
+            // Student list 
+            Expanded( 
+              child: ListView.builder( 
+                itemCount: students.length, 
+                itemBuilder: (context, index) { 
+                  String name = students[index]; 
+                  bool isPresent = attendance[name] ?? false; 
+ 
+                  return Card( 
+                    child: ListTile( 
+                      title: Text( 
+                        name, 
+                        style: TextStyle( 
+                          fontSize: 18, 
+                        ), 
+                      ), 
+                      trailing: Checkbox( 
+                        value: isPresent, 
+                        onChanged: (value) { 
+                          setState(() { 
+                            attendance[name] = value!; 
+                          }); 
+                        }, 
+                      ), 
+                      leading: CircleAvatar( 
+                        backgroundColor: 
+                            isPresent ? Colors.green : Colors.red, 
+                        child: Icon( 
+                          isPresent ? Icons.check : Icons.close, 
+                          color: Colors.white, 
+                        ), 
+                      ), 
+                    ), 
+                  ); 
+                }, 
+), 
+), 
+], 
+), 
+), 
+); 
+} 
+} 
+15. Go to new terminal and enter "cd attendance_app" 
+16. To run the flutter app enter this in the terminal 
+"flutter run -d edge" 
+16. Output: 
