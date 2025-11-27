@@ -1,0 +1,48 @@
+outputttt:""PS D:\shivanit\WATMAP 2025-26\programs\first-app> node index1.js
+Connected to MongoDB
+Record successfully created
+Record successfully read:
+{
+  _id: new ObjectId("67ab2a5aa7fa0491aa053d6"),
+  name: 'John',
+  age: 30,
+  height: 6.11
+}
+Record successfully updated
+Record successfully deleted
+PS D:\shivanit\WATMAP 2025-26\programs\first-app>
+
+ACTUAL PROGRAM
+const { MongoClient } = require("mongodb");
+const url = "mongodb://localhost:27017/";
+const client = new MongoClient(url);
+
+async function run() {
+  try {
+    await client.connect();
+    console.log("Connected to MongoDB");
+
+    const db = client.db("xplaindb");
+    const user = { name: "John", age: 50, height: 6.11 };
+
+    await db.collection("users").insertOne(user);
+    console.log("Record successfully created");
+
+    const found = await db.collection("users").findOne({});
+    console.log("Record successfully read:", found);
+
+    await db.collection("users").updateOne({ age: 50 }, { $set: { name: "John Smith" } });
+    console.log("Record successfully updated");
+
+    await db.collection("users").deleteOne({ age: 50 });
+    console.log("Record successfully deleted");
+  } catch (err) {
+    console.error(err);
+  } finally {
+    await client.close();
+  }
+}
+
+run();
+
+
