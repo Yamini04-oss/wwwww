@@ -1,0 +1,87 @@
+3. Fetch data using AJAX and display asynchronously
+Fetch Data using AJAX (with JavaScript)
+Here’s a simple demo that fetches data from a text file (data.txt) and displays it:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AJAX Example</title>
+</head>
+<body>
+  <h2>Fetch Data using AJAX</h2>
+
+  <button onclick="loadData()">Fetch Data</button>
+  <p id="output"></p>
+
+  <script>
+    function loadData() {
+      // Create XMLHttpRequest object
+      let xhr = new XMLHttpRequest();
+
+      // Open request: GET request to "data.txt"
+      xhr.open("GET", "data.txt", true);
+
+      // When request completes
+      xhr.onload = function() {
+        if (xhr.status == 200) {
+          document.getElementById("output").innerHTML = xhr.responseText;
+        } else {
+          document.getElementById("output").innerHTML = "Error loading data.";
+        }
+      };
+
+      // Send the request
+      xhr.send();
+    }
+  </script>
+</body>
+</html>
+
+Procedure:
+Step 1: Prepare the files
+Create a project folder (example: AJAXDemo) and put the following two files inside it:
+1.	index.html → your HTML program (the above code)
+2.	data.txt → a simple text file with some content (for example:
+
+ Hello, this text was loaded using AJAX!
+Using VS Code (Live Server extension)
+1.	Install Visual Studio Code.
+
+2.	Open your project folder in VS Code.
+
+3.	Install the extension Live Server.
+
+4.	Right-click index.html → Open with Live Server.
+
+5.	The browser will open with http://127.0.0.1:5500/index.html (or similar).
+Step 1: Open VS Code
+●	Launch Visual Studio Code.
+
+●	Open your project folder (e.g., AJAXDemo where you have index.html and data.txt).
+
+________________________________________
+🔹 Step 2: Install Live Server Extension
+1.	Look at the left sidebar in VS Code and click the Extensions icon (it looks like 4 small squares).
+ (Shortcut: press Ctrl+Shift+X on Windows/Linux or Cmd+Shift+X on Mac)
+
+In the search bar, type:
+
+ Live Server
+2.	
+3.	Find the extension by Ritwick Dey (most popular one).
+
+4.	Click Install.
+
+Step 3: Run with Live Server
+1.	Once installed, open your index.html file in VS Code.
+
+2.	Right-click anywhere inside the file and select:
+ 👉 “Open with Live Server”
+
+3.	A browser window will open at an address like:
+
+ http://127.0.0.1:5500/index.html
+Step 4: Test
+●	Click your Fetch Data button.
+
+●	If data.txt is in the same folder, you’ll see its content displayed inside the page
