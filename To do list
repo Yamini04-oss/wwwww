@@ -1,0 +1,141 @@
+Advanced (Frameworks & Full-stack Concepts)
+5. Create a single-page web app using React
+a. To-do list, Weather app, or Calculator
+b. Use: React (Hooks, Props, Components)
+
+Let’s build a React Single Page App step by step.
+ I’ll show you a To-Do List App (simplest and most useful). It uses:
+●	Components (breaking UI into reusable pieces)
+
+●	Props (passing data between components)
+
+●	Hooks (useState) (to manage state)
+1) To-Do List App in React
+import React, { useState } from "react";
+
+function TodoApp() {
+  // State to store tasks
+  const [tasks, setTasks] = useState([]);
+  const [newTask, setNewTask] = useState("");
+
+  // Add new task
+  const addTask = () => {
+    if (newTask.trim() === "") return; // ignore empty tasks
+    setTasks([...tasks, { id: Date.now(), text: newTask }]);
+    setNewTask(""); // clear input
+  };
+
+  // Delete task
+  const deleteTask = (id) => {
+    setTasks(tasks.filter((task) => task.id !== id));
+  };
+
+  return (
+    <div style={styles.container}>
+      <h2>To-Do List</h2>
+
+      {/* Input and Add Button */}
+      <div style={styles.inputContainer}>
+        <input
+          type="text"
+          value={newTask}
+          placeholder="Enter a task..."
+          onChange={(e) => setNewTask(e.target.value)}
+          style={styles.input}
+        />
+        <button onClick={addTask} style={styles.button}>Add</button>
+      </div>
+
+      {/* Task List */}
+      <ul style={styles.list}>
+        {tasks.map((task) => (
+          <li key={task.id} style={styles.listItem}>
+            {task.text}
+            <button onClick={() => deleteTask(task.id)} style={styles.deleteBtn}>
+              X
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+// Simple CSS-in-JS styles
+const styles = {
+  container: { textAlign: "center", marginTop: "50px", fontFamily: "Arial" },
+  inputContainer: { marginBottom: "20px" },
+  input: { padding: "8px", width: "200px" },
+  button: { marginLeft: "10px", padding: "8px 12px", cursor: "pointer" },
+  list: { listStyle: "none", padding: 0 },
+  listItem: {
+    margin: "10px 0",
+    padding: "10px",
+    background: "#f2f2f2",
+    borderRadius: "5px",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center"
+  },
+  deleteBtn: {
+    background: "red",
+    color: "white",
+    border: "none",
+    borderRadius: "3px",
+    padding: "5px",
+    cursor: "pointer"
+  }
+};
+
+export default TodoApp;
+
+
+ How it Works:
+1.	useState manages tasks (tasks) and new input (newTask).
+
+2.	addTask() adds a new task to the list.
+
+3.	deleteTask(id) removes a task by its ID.
+
+4.	Tasks are displayed dynamically using .map().
+Example Usage (index.js)
+import React from "react";
+import ReactDOM from "react-dom/client";
+import TodoApp from "./TodoApp";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<TodoApp />);
+
+1. Software Requirements (Setup for React App)
+To run the To-Do List app in React, you need:
+🔹 a) Node.js & npm
+●	Node.js is a JavaScript runtime environment.
+
+●	npm (Node Package Manager) comes with Node.js and is used to install dependencies.
+
+●	 Download from https://nodejs.org (choose LTS version).
+
+Check installation:
+node -v
+npm -v
+
+________________________________________
+🔹 b) Code Editor
+●	VS Code (Visual Studio Code) – most popular for React development.
+
+●	 Download: https://code.visualstudio.com/
+
+________________________________________
+🔹 c) React Setup
+You can create a React project using Create React App or Vite (faster).
+Using Create React App (simple way):
+npx create-react-app todo-app
+cd todo-app
+npm start
+
+This will start a development server on http://localhost:3000.
+________________________________________
+🔹 d) Web Browser
+●	Chrome, Edge, or Firefox to run and debug your app.
+
+
